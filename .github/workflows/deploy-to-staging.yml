@@ -1,23 +1,28 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy container app to Azure Web App - pwabuilder-cloudapk(pre)
+# This GitHub Action workflow runs on checkin to main branch and deploys to the staging slot of the cloudapk web app.
+
+name: Build and deploy container app to Azure Web App - pwabuilder-cloudapk
+
 on:
   push:
     branches:
-      - dev
+      - main
   workflow_dispatch: null
+
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
       contents: read
       id-token: write
+
     steps:
       - uses: actions/checkout@v4
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-
+        
       - name: Login with Azure CLI
         uses: azure/login@v2
         with:
@@ -27,11 +32,12 @@ jobs:
 
       - name: Log in to Azure docker registry (ACR)
         run: az acr login --name pwabuilder
-
+          
       - name: Run docker build
         run: |
-          docker build . -t pwabuilder.azurecr.io/${{secrets.AzureAppService_ContainerUsername_c4f6902b5ee546e8847acb25a00561b6}}/cloudapk-dev:preview
-          docker push pwabuilder.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_c4f6902b5ee546e8847acb25a00561b6 }}/cloudapk-dev:preview
+          docker build . -t pwabuilder.azurecr.io/${{ secrets.REGISTRY_USER }}/cloudapk-prod:staging
+          docker push pwabuilder.azurecr.io/${{ secrets.REGISTRY_USER }}/cloudapk-prod:staging
+
   deploy:
     runs-on: ubuntu-latest
     permissions:
@@ -39,8 +45,9 @@ jobs:
       id-token: write
     needs: build
     environment:
-      name: pre
+      name: staging
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+    
     steps:
       - name: Login with Azure CLI
         uses: azure/login@v2
@@ -54,5 +61,5 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: pwabuilder-cloudapk
-          slot-name: pre
-          images: pwabuilder.azurecr.io/${{secrets.AzureAppService_ContainerUsername_c4f6902b5ee546e8847acb25a00561b6}}/cloudapk-dev:preview
+          slot-name: staging
+          images: pwabuilder.azurecr.io/${{ secrets.REGISTRY_USER }}/cloudapk-prod:staging
