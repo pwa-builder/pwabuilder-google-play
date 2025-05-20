@@ -95,3 +95,7 @@ The response will be a zip file containing the generated app.
 # More info
 
 Once an Android app package has been generated, follow the steps on [Next Steps](Next-steps.md).
+
+# Deploy
+
+Deploys are automatically pushed to cloudapk/staging slot. To deploy to production, swap staging and production.
