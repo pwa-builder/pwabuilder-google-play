@@ -10,6 +10,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
       - name: Set up Docker Buildx
@@ -22,16 +24,9 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      - name: Log in to registry
+      - name: Log in to Azure docker registry (ACR)
         uses: azure/docker-login@v2
-        with:
-          login-server: https://pwabuilder.azurecr.io/
-          username: ${{
-            secrets.AzureAppService_ContainerUsername_c4f6902b5ee546e8847acb25a00561b6
-            }}
-          password: ${{
-            secrets.AzureAppService_lContainerPassword_4fbee4d970264b12bb65c9bad20ba87f
-            }}
+        run: az acr login --name pwabuilder
 
       - run: |
           docker build . -t pwabuilder.azurecr.io/${{secrets.AzureAppService_ContainerUsername_c4f6902b5ee546e8847acb25a00561b6}}/cloudapk-dev:preview
