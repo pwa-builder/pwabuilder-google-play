@@ -54,5 +54,5 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: pwabuilder-cloudapk
-          slot-name: pre
+          slot-name: prebuilder-cloudapk-pre
           images: pwabuilder.azurecr.io/${{secrets.AzureAppService_ContainerUsername_c4f6902b5ee546e8847acb25a00561b6}}/cloudapk-dev:preview
