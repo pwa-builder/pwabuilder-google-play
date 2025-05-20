@@ -28,6 +28,14 @@ jobs:
       - name: Log in to Azure docker registry (ACR)
         run: az acr login --name pwabuilder --expose-token
 
+      - name: Setup Docker to use Azure authentication
+        run: |
+          export DOCKER_REGISTRY_SERVER="pwabuilder.azurecr.io"
+          export DOCKER_USER="0"  # Managed Identity does not use a username
+          DOCKER_PASSWORD=$(az acr login --name pwabuilder --expose-token --output tsv)
+          echo "::add-mask::$DOCKER_PASSWORD"  # Hides the token in logs
+          echo "$DOCKER_PASSWORD" | docker login $DOCKER_REGISTRY_SERVER -u $DOCKER_USER --password-stdin
+
       - name: Run docker build
         run: |
           docker build . -t pwabuilder.azurecr.io/${{secrets.AzureAppService_ContainerUsername_c4f6902b5ee546e8847acb25a00561b6}}/cloudapk-dev:preview
