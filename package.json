@@ -14,14 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pwa-builder/CloudApk.git"
+    "url": "git+https://github.com/pwa-builder/pwabuilder-google-play.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/pwa-builder/CloudAPK/issues"
+    "url": "https://github.com/pwa-builder/pwabuilder/issues"
   },
-  "homepage": "https://github.com/pwa-builder/CloudAPK/",
+  "homepage": "https://github.com/pwa-builder/pwabuilder-google-play/",
   "dependencies": {
     "@bubblewrap/core": "^1.22.5",
     "@resvg/resvg-js": "^2.4.1",
