@@ -25,7 +25,6 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Log in to Azure docker registry (ACR)
-        uses: azure/docker-login@v2
         run: az acr login --name pwabuilder
 
       - run: |
