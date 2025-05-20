@@ -34,6 +34,9 @@ jobs:
           docker push pwabuilder.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_c4f6902b5ee546e8847acb25a00561b6 }}/cloudapk-dev:preview
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     needs: build
     environment:
       name: pre
