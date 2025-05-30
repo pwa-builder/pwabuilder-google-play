@@ -67,7 +67,6 @@ export class BubbleWrapper {
     // Create an optimized APK.
     await this.generateTwaProject();
     const apkPath = await this.buildApk();
-    //const optimizedApkPath = await this.optimizeApk(apkPath);
 
     // Do we have a signing key?
     // If so, sign the APK, generate digital asset links file, and generate an app bundle.
@@ -191,18 +190,6 @@ export class BubbleWrapper {
     await gradleWrapper.assembleRelease();
     return `${this.projectDirectory}/app/build/outputs/apk/release/app-release-unsigned.apk`;
   }
-
-  // COMMENTED OUT: Zipalign is no longer necessary, as latest versions of Gradle plugin automatically calls zipalign.
-  // private async optimizeApk(apkFilePath: string): Promise<string> {
-  //     console.info("Optimizing the APK...");
-  //     const optimizedApkPath = `${this.projectDirectory}/app-release-unsigned-aligned.apk`;
-  //     await this.androidSdkTools.zipalign(
-  //         apkFilePath, // input file
-  //         optimizedApkPath, // output file
-  //     );
-  //
-  //     return optimizedApkPath;
-  // }
 
   private async signApk(
     apkFilePath: string,

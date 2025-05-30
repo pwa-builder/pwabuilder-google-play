@@ -12,7 +12,7 @@ export function logUrlResult(url: string, success: boolean, error: string | null
         headers: {
             "Content-Type": "application/json; charset=UTF-8"
         },
-        body: JSON.stringify({
+        body: JSON.stringify({ 
             url: url,
             androidPackage: success,
             androidPackageError: error
