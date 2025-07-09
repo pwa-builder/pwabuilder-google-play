@@ -205,7 +205,7 @@ export class BubbleWrapper {
     await this.androidSdkTools.apksigner(
       signingInfo.keyFilePath,
       signingInfo.storePassword,
-      `"${passwords.storePassword}"`, // Escape the store password, otherwise passwords with spaces will break. See https://github.com/pwa-builder/PWABuilder/issues/5017#issuecomment-3049710075
+      `"${signingInfo.storePassword}"`, // Escape the store password, otherwise passwords with spaces will break. See https://github.com/pwa-builder/PWABuilder/issues/5017#issuecomment-3049710075
       signingInfo.alias,
       `"${signingInfo.keyPassword}"`, // Escape the key password for the same reason.
       apkFilePath,
