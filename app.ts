@@ -15,9 +15,9 @@ app.use('/', router);
 app.use(express.static('static'));
 
 try {
-  const bubblewrapPkg = require('@bubblewrap/core/package.json');
-  console.log('Initializing PWABuilder Google Play packager with Bubblewrap version', bubblewrapPkg.version);
+  const bubblewrapVersion = require('./package.json').dependencies['@bubblewrap/core'];
+  console.log('Initializing PWABuilder Google Play packager with Bubblewrap version', bubblewrapVersion);
 } catch (error) {
-  console.warn('Unable to find Bubblewrap version. Continuing without version logging.');
+  console.warn('Unable to find @bubblewrap/core version. Continuing without version logging.');
 }
 export default app;
