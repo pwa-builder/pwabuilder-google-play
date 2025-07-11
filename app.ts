@@ -15,10 +15,4 @@ app.use(
 app.use('/', router);
 app.use(express.static('static'));
 
-try {
-  const bubblewrapVersion = require(path.resolve(__dirname, 'package.json')).dependencies['@bubblewrap/core'];
-  console.log('Initializing PWABuilder Google Play packager with Bubblewrap version', bubblewrapVersion);
-} catch (error) {
-  console.warn('Unable to find @bubblewrap/core version. Continuing without version logging.');
-}
 export default app;
