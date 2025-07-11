@@ -5,7 +5,7 @@ We utilize [Google's Bubblewrap](https://github.com/googlechromelabs/bubblewrap)
 
 This tool generates a zip file containing both an `.apk` file (for testing) and an `.aab` file (for submission to Google Play Store).
 
-This app uses [PWABuilder's Android Build Box]([url](https://github.com/pwa-builder/docker-android-build-box)) docker image, which contains the necessary Android SDK Build Tools to execute Bubblewrap.
+This app uses [PWABuilder's Android Build Box](https://github.com/pwa-builder/docker-android-build-box) docker image, which contains the necessary Android SDK Build Tools to execute Bubblewrap.
 
 # Issues
 
